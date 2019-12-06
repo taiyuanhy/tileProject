@@ -11,6 +11,5 @@ public class TileProjectApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TileProjectApplication.class, args);
 	}
-
 }
 
