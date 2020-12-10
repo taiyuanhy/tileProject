@@ -33,7 +33,7 @@ public class GeoTileController {
 			out=response.getOutputStream(); //得到向客户端输出二进制数据的对象 
 			if(args.size()==0){
 				response.setContentType("text/plain");
-				String outString= "{\"success\":0,\"message\":\""+"未找到瓦片路径的参数"+"\"}";
+				String outString= "{\"success\":0,\"message\":\"can not find bundleFilePath parameters.\"}";
 				out.write(outString.getBytes("utf-8"));
 				return;
 			}
@@ -46,7 +46,7 @@ public class GeoTileController {
 			}
 			else{
 				response.setContentType("text/plain");
-				String outString= "{\"success\":0,\"message\":\""+"未找到图片,请检查路径是否正确"+"\"}";
+				String outString= "{\"success\":0,\"message\":\"can not find data,please check x,y,z.\"}";
 				out.write(outString.getBytes("utf-8"));
 			}
 			out.flush();
