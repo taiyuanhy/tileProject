@@ -8,6 +8,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -18,7 +20,7 @@ import javax.swing.JTextArea;
 
 public class GUI {
 	public void setupUI() {
-		JFrame f = new JFrame("地图瓦片生成工具v1.0");
+		JFrame f = new JFrame("地图瓦片生成工具v1.1");
 		f.setLayout(null);
 		f.setLocation(300, 300);
 		f.setSize(600, 500);
@@ -71,8 +73,15 @@ public class GUI {
 							textArea.append("你打开的文件是: " + path);
 							textArea.append("\r\n");
 							textArea.setCaretPosition(textArea.getText().length());
+							TextAreaOutputStream taOutputStream = new TextAreaOutputStream(textArea, "");
+                            try {
+								PrintStream ps = new PrintStream(taOutputStream, true, "utf-8");
+								System.setOut(ps);
+								System.setErr(ps);
+                            } catch (UnsupportedEncodingException ex) {
+                                throw new RuntimeException(ex);
+                            }
 							try {
-								GISUtil.textArea = textArea;
 								GISUtil.generateBundleFile(path);
 								bu1.setEnabled(true);
 								bu1.addActionListener(new ActionListener() {

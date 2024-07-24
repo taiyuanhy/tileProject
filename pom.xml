@@ -10,9 +10,9 @@
 	</parent>
 	<groupId>com.uinv.gis</groupId>
 	<artifactId>tileProject</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>tileProject</name>
-	<description>Demo project for Spring Boot</description>
+	<description>tile server for bundleFile</description>
 
 	<properties>
 		<java.version>1.8</java.version>

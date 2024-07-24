@@ -128,11 +128,11 @@ public class GISUtil {
 						if (targetFile.exists()) {
 							if (levelFiles[j].getAbsolutePath().endsWith("bundle")) {
 								combineTile(levelFiles[j].getAbsolutePath(), targetFile.getAbsolutePath());
-								System.out.println("合并" + levelFiles[j].getPath() + "到" + targetFile.getPath());
+								System.out.println("merge" + levelFiles[j].getPath() + "to" + targetFile.getPath());
 							}
 						} else {
 							copyFileUsingFileChannels(levelFiles[j], targetFile);
-							System.out.println("拷贝" + levelFiles[j].getPath() + "到" + targetFile.getPath());
+							System.out.println("copy" + levelFiles[j].getPath() + "to" + targetFile.getPath());
 						}
 					}
 				}
@@ -405,10 +405,10 @@ public class GISUtil {
 					// 右下角（最后一个）的bundle文件开始行列号
 					long maxBundleRow = m_packetSize * (maxrow / m_packetSize);
 					long maxBundleCol = m_packetSize * (maxcol / m_packetSize);
-					System.out.println("第" + level + "级--bundle最小行数:" + minBundleRow + ",最小列数:" + minBundleCol);
-					System.out.println("第" + level + "级--bundle最大行数:" + maxBundleRow + ",最大列数:" + maxBundleCol);
-					System.out.println("第" + level + "级--bundle共:" + ((maxBundleRow - minBundleRow) / 128 + 1) + "行,"
-							+ ((maxBundleCol - minBundleCol) / 128 + 1) + "列.");
+					System.out.println("level" + level + "--bundle minRowNum:" + minBundleRow + ",minColumnNum:" + minBundleCol);
+					System.out.println("level" + level + "--bundle maxRowNum:" + maxBundleRow + ",maxColumnNum:" + maxBundleCol);
+					System.out.println("level" + level + "--bundle totalRowNum:" + ((maxBundleRow - minBundleRow) / 128 + 1) + ",totalColumnNum"
+							+ ((maxBundleCol - minBundleCol) / 128 + 1) + ".");
 					// 该级别下全部bundle文件
 					for (long j = minBundleCol; j <= maxBundleCol; j += 128) {
 						for (long j2 = minBundleRow; j2 <= maxBundleRow; j2 += 128) {
@@ -424,7 +424,7 @@ public class GISUtil {
 								rowhex = rowhex.substring(rowhex.length() - 4);
 							}
 							String filename = "R" + rowhex + "C" + colhex;
-							System.out.println("第" + level + "级:" + filename);
+							System.out.println("level" + level + "--fileName:" + filename+".bundle");
 							generateBundleFromImage(path, Integer.parseInt(level), j, j2, filename, suffix);
 						}
 					}
@@ -506,20 +506,25 @@ public class GISUtil {
 
 	public static void main(String args[]) throws Exception {
 		// combineTile("F:\\tiles\\_alllayers\\test\\L17\\Rc580Ca000(1).bundle","F:\\tiles\\_alllayers\\test\\L17\\Rc580Ca000(2).bundle");
-		generateBundleFile("E:\\北京0-12\\googlemaps\\satellite");
-		// combineTileFolder("E:\\哈尔滨\\googlemaps\\satellite_en","E:\\tiles\\satellite");
+//		generateBundleFile("E:\\北京0-12\\googlemaps\\satellite");
+//		 combineTileFolder("C:\\Users\\Administrator\\Documents\\WXWork\\1688851027322843\\Cache\\File\\2021-07\\北京","C:\\Users\\Administrator\\Documents\\WXWork\\1688851027322843\\Cache\\File\\2021-07\\武汉");
+//		byte[] result = getTiles("C:\\Users\\Administrator\\Documents\\WXWork\\1688851027322843\\Cache\\File\\2022-08\\_alllayers(2)", 7, 103, 48);
+//		System.out.println(result);
+		String string = "鏈壘鍒板浘鐗�,璇锋鏌ヨ矾寰勬槸鍚︽纭�";
+		string = new String(string.getBytes("gbk"),"utf-8");
+		System.out.println(string);
 	}
-	private static class System
-	{
-	  private static class out
-	  {
-	    private static void println(String a)
-	    {
-	      textArea.append(a);
-	      textArea.append("\r\n");
-          textArea.setCaretPosition(textArea.getText().length());
-	    }
-	  }
-	}
+//	private static class System
+//	{
+//	  private static class out
+//	  {
+//	    private static void println(String a)
+//	    {
+//	      textArea.append(a);
+//	      textArea.append("\r\n");
+//          textArea.setCaretPosition(textArea.getText().length());
+//	    }
+//	  }
+//	}
 }
 
