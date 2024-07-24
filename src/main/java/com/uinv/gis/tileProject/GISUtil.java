@@ -360,11 +360,13 @@ public class GISUtil {
 		return true;
 	}
 
-	public static void generateBundleFile(String path) throws IOException {
+	public static String generateBundleFile(String path) throws IOException {
 		File file = new File(path);
 		String suffix = getSuffix(file);
 		File[] files = file.listFiles();
 		String[] names = file.list();
+		//bundle文件存放的相对路径
+		String bundlePath = "bundle";
 		int m_packetSize = 128;
 		if (names != null) {
 			for (int i = 0; i < files.length; i++) {
@@ -409,6 +411,7 @@ public class GISUtil {
 					System.out.println("level" + level + "--bundle maxRowNum:" + maxBundleRow + ",maxColumnNum:" + maxBundleCol);
 					System.out.println("level" + level + "--bundle totalRowNum:" + ((maxBundleRow - minBundleRow) / 128 + 1) + ",totalColumnNum"
 							+ ((maxBundleCol - minBundleCol) / 128 + 1) + ".");
+
 					// 该级别下全部bundle文件
 					for (long j = minBundleCol; j <= maxBundleCol; j += 128) {
 						for (long j2 = minBundleRow; j2 <= maxBundleRow; j2 += 128) {
@@ -425,17 +428,17 @@ public class GISUtil {
 							}
 							String filename = "R" + rowhex + "C" + colhex;
 							System.out.println("level" + level + "--fileName:" + filename+".bundle");
-							generateBundleFromImage(path, Integer.parseInt(level), j, j2, filename, suffix);
+							generateBundleFromImage(path, Integer.parseInt(level), j, j2, filename, suffix,bundlePath);
 						}
 					}
 				}
 			}
 		}
+		return path+File.separator+bundlePath;
 	}
 
 	public static void generateBundleFromImage(String path, int level, long col, long row, String filename,
-			String suffix) throws IOException {
-		String bundlePath = "bundle";
+			String suffix,String bundlePath) throws IOException {
 	    String l = "0" + level;
 	    int lLength = l.length();
 	    if (lLength > 2) {

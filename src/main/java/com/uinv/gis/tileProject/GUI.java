@@ -67,6 +67,7 @@ public class GUI {
 					new Thread(new Runnable() {
 						@Override
 						public void run() {
+							bu1.setEnabled(false);
 							// 比较耗时的计算与相应的打印内容代码写在这里
 							// 这样可以实时输出信息
 							final String path = chooser.getSelectedFile().getAbsolutePath();
@@ -82,7 +83,8 @@ public class GUI {
                                 throw new RuntimeException(ex);
                             }
 							try {
-								GISUtil.generateBundleFile(path);
+								String bundlePath = GISUtil.generateBundleFile(path);
+								textArea.append("转换成功,文件存放路径为 " + bundlePath);
 								bu1.setEnabled(true);
 								bu1.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
